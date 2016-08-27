@@ -1,0 +1,67 @@
+
+<!--Implement an algorithm to determine if a string has all unique characters. What if you can not use additional data structure?-->
+
+<html>
+	<head>
+		<title>if a string has all unique characters</title>
+	</head>
+	<body>
+		
+		<h1>1.1 If a string has all unique characters</h1>
+		<span>Please enter a string:</span>
+		<input type="text" name="string">
+		<input type="button" value="check if the string is unique">
+
+		<p>Result: <span id="result"></span></p>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+		<script type="text/javascript">
+$("[type='button']").click(function(){
+				var stringCharArr = $("[name='string']").val();
+				var result = isUnique(stringCharArr);
+				$("#result").html(result);
+			});
+
+
+function isUnique(charArr){
+	var map = {};
+	var output;
+	for(var i=0; i<charArr.length; i++){
+		if(map[charArr[i]] === undefined){
+			map[charArr[i]] = 1;
+		}else{
+			console.log(charArr[i] + " is not unique!")
+			output =  charArr[i]+ " is not unique!";
+			return output;
+		}
+	}
+	output = "All characters are unique!";
+	return output;
+}
+
+function isUniqueOLD(charArr){
+	for(var i=0; i<charArr.length; i++){
+		for(var j=0; j<charArr.length; j++){
+			if(charArr[i] === charArr[j] && i != j){
+				console.log("This "+i+" is not unique.")
+			}
+		}
+	}
+}
+
+// o(n) = n^2
+
+
+
+
+
+//How to change/improve the 
+
+
+</script>
+
+	</body>
+</html>
+
+
+
+
