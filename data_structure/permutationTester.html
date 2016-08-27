@@ -1,0 +1,84 @@
+
+<!--Given two strings, write a method to deside if one is a permutation of the other-->
+
+<html>
+	<head>
+		<title>Permutation Tester</title>
+	</head>
+	<body>
+		
+		<h1>1.2 Permutation Tester</h1>
+		<span>Please enter a string:</span>
+		<input type="text" name="string1">
+		<br>
+		<span>Please enter another string to check if it is a permutation of the first string:</span>
+		<input type="text" name="string2">
+		<input type="button" value="permutation tester">
+		<br>
+		<p>Result: <span id="result"></span></p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>	
+<script type="text/javascript">
+
+	$("[type='button']").click(function(){
+		var stringCharArr1 = $("[name='string1']").val().toLowerCase();
+		var stringCharArr2 = $("[name='string2']").val().toLowerCase();
+		var result = permutationTester(stringCharArr1, stringCharArr2);
+		$("#result").html(result);
+	});
+
+
+function permutationTester(charArr1,charArr2){
+	var map = {};
+	var output;
+	if(charArr1.length == charArr2.length){
+		for(var i=0; i<charArr1.length; i++){
+			if(map[charArr1[i]] === undefined){
+				map[charArr1[i]] = 1;
+			}else{
+				map[charArr1[i]]+=1;
+			}
+		}
+
+		for(var i=0; i<charArr2.length;i++){
+			if(map[charArr2[i]]!==undefined){
+				map[charArr2[i]]-=1;
+			}else{
+				return charArr2[i] + " from " + "\"" + charArr2 + "\"" + " does not exist in " + "\"" + charArr1 + "\"";
+			}
+		}
+
+		for(var key in map){
+			if(map[key] !== 0){
+				return  "\"" + charArr2 + "\"" + " is not a permutation of " + "\"" + charArr1 + "\"";
+			}
+		}
+
+		return "\"" + charArr2 + "\"" + " is a permutation of " + "\"" + charArr1 + "\"";
+
+	}else{
+		output = "The two entered strings do not have equal characters. So difinietly the second one is not a permutation of the first one!";
+		return output;
+	}
+
+	output = console.log (map);
+	return output;
+
+
+	
+}
+
+
+
+// o(n) = 
+
+
+
+
+</script>
+
+	</body>
+</html>
+
+
+
+
