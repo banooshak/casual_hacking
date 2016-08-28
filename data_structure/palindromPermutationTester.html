@@ -1,0 +1,70 @@
+
+<!--Given a strings, write a function to check if it is a permutation of palindrom. A palindrom is a word or phrase that is the same forwards and backwards.-->
+
+<html>
+	<head>
+		<title>Palindrom Permutation Tester</title>
+	</head>
+	<body>
+		
+		<h1>1.4 Palindrom Permutation Tester</h1>
+		<span>Please enter a string:</span>
+		<input type="text" name="string1">
+		<br>
+		<input type="button" value="palindrom permutation tester">
+		<br>
+		<p>Result: <span id="result"></span></p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>	
+<script type="text/javascript">
+
+	$("[type='button']").click(function(){
+		var stringCharArr = $("[name='string1']").val().toLowerCase();
+		var result = permutationTester(stringCharArr);
+		$("#result").html(result);
+	});
+
+
+function permutationTester(charArr){
+	var map = {};
+	for(var i=0; i<charArr.length ;i++){
+			if(map[charArr[i]] === undefined){
+				map[charArr[i]] = 1;
+			}else{
+				map[charArr[i]] +=1;
+			}
+		}
+	var counter = 0;
+	for(key in map){
+		if(charArr.length % 2 == 0){
+			if(map[key] %2 != 0){
+				return charArr + " is not a permutation of a palindrom";
+			}
+		}else{
+			if(map[key] %2 !=0){
+				counter++;
+			}
+			if(counter > 1){
+				return charArr + " is not a permutation of a palindrom";
+			}
+		}
+	}	
+
+	return charArr + " is a permutation of a palindrom";
+	
+}
+
+
+
+// o(n) = n
+
+
+
+
+</script>
+
+	</body>
+</html>
+
+
+
+
