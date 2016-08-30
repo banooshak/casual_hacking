@@ -1,5 +1,5 @@
 
-<!--Given a strings, write a function to check if it is a permutation of palindrom. A palindrom is a word or phrase that is the same forwards and backwards.-->
+<!--There are three types of edit that can be performed on strings: insert a character, remove a character, or replace a character. Given two strings, write a function to check if they are one edit(or sero edits away.)-->
 
 <html>
 	<head>
@@ -19,12 +19,12 @@
 
 	$("[type='button']").click(function(){
 		var stringCharArr = $("[name='string1']").val().toLowerCase();
-		var result = palindromPermutationTester(stringCharArr);
+		var result = permutationTester(stringCharArr);
 		$("#result").html(result);
 	});
 
 
-function palindromPermutationTester(charArr){
+function permutationTester(charArr){
 	var map = {};
 	for(var i=0; i<charArr.length ;i++){
 			if(map[charArr[i]] === undefined){

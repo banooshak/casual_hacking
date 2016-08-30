@@ -1,0 +1,89 @@
+
+<!--There are three types of edit that can be performed on strings: insert a character, remove a character, or replace a character. Given two strings, write a function to check if they are one edit(or zero edits away.)-->
+
+<html>
+	<head>
+		<title>One way edit Tester</title>
+	</head>
+	<body>
+		
+		<h1>1.5 One way edit Tester</h1>
+		<span>Please enter two strings:</span>
+		<input type="text" name="string1"> &nbsp; <input type="text" name="string2">
+		<br>
+		<input type="button" value="One edit away Tester">
+		<br>
+		<p>Result: <span id="result"></span></p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>	
+<script type="text/javascript">
+
+	$("[type='button']").click(function(){
+		var stringCharArr1 = $("[name='string1']").val().toLowerCase();
+		var stringCharArr2 = $("[name='string2']").val().toLowerCase();
+		var result = oneEditAwayTester(stringCharArr1, stringCharArr2);
+		$("#result").html(result);
+	});
+
+
+function testOneReplaceAway(charArr1, charArr2){
+	var counter =0;
+	for(var i=0; i<charArr1.length;i++){
+		if(charArr1[i] != charArr2[i]){
+			counter++;
+		}
+		if(counter >1){
+			return charArr1 + " and " + charArr2 + " are not one edit away";
+		}
+	}
+	return charArr1 + " and " + charArr2 + " are one edit away";
+}
+
+
+
+function oneEditAwayTester(charArr1, charArr2){
+
+	if(charArr1.length == charArr2.length+1){
+		return testOneRemoveAway(charArr1, charArr2);
+
+	}else if(charArr2.length == charArr1.length+1) {
+		return testOneRemoveAway(charArr2, charArr1);
+
+	} else if(charArr1.length == charArr2.length){
+		return testOneReplaceAway(charArr1, charArr2);
+	}else{
+		return charArr1 + " and " + charArr2 + " are not one edit away";
+	}
+}
+
+function testOneRemoveAway(s1, s2){
+	var i=0, j=0;
+
+	while(i<s1.length && i-j<2){
+		if(s1[i] !=s2[j]){
+			i++;
+		}else{
+			i++;
+			j++;
+		}
+	}
+	if(i-j<2){
+		return s1 + " and " + s2 + " are one edit away";
+	}
+
+	return s1 + " and " + s2 + " are not one edit away";
+}
+
+
+// o(n) = n
+
+
+
+
+</script>
+
+	</body>
+</html>
+
+
+
+
