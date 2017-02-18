@@ -1,0 +1,19 @@
+{
+  "name": "meadowlark",
+  "version": "1.0.0",
+  "description": "chapter 3 practice",
+  "main": "meadowlark.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "express",
+    "nodejs"
+  ],
+  "author": "Banafsheh Nasiri",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.1",
+    "express-handlebars": "^3.0.0"
+  }
+}
