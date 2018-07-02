@@ -1,0 +1,40 @@
+html
+    head
+        link(rel="stylesheet", href="/static/main.css")
+    body
+        form#createRecipe(method='POST' action='/createRecipe')
+            div.form-row
+                div.form-group
+                    label(for='recipeName') Recipe Name:
+                div.form-input
+                    input#recipeName.form-control(type='text', placeholder='Recipe Name' name='recipeName')
+            div.form-row
+                div.form-group
+                    label(for='ingredients') Ingredients:
+                div.form-input   
+                    input#ingredients.form-control(type='text', placeholder='Ingredients' name='ingredients')
+            div.form-row
+                div.form-group
+                    label(for='images') Images:
+                div.form-input
+                    input#images.form-control(type='text', placeholder='Images source' name='images')    
+            div.form-row
+                div.form-group
+                    label(for='direction') Directions:
+                div.form-input    
+                    textarea#direction.form-control(placeholder='Directions' name='direction')
+            div.form-row
+                button#submit(type='submit') Create Recipe 
+        
+
+        h1 Hello World!
+
+        if message != null
+            p Hi there, #{message}!
+        else
+            p Hi there, unknown person!
+
+        div#main
+    footer
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+        script(src="/static/main.js")

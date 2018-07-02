@@ -1,0 +1,64 @@
+<html>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$( document ).ready(function() {
+    console.log( "ready!" );
+    test();
+});
+
+
+function Node(data) {
+	this.data = data;
+	this.next = null;
+
+	this.hasNext = function() {
+		if (this.next == null) {
+			return false;
+		}
+		return true;
+	} 
+
+	this.getData = function() {
+		return this.data;
+	}
+
+	this.getNext = function() {
+		return this.next;
+	}
+}
+
+function SinglyLinkedList(data) {
+	this.head = new Node(data);
+
+	this.addNode = function addNode(data) {
+		var newNode = new Node(data);
+		newNode.next = this.head;
+		this.head = newNode;
+	}
+
+	this.getHead = function getHead() {
+		return this.head;
+	}
+
+}
+
+function test() {
+	var ll = new SinglyLinkedList(0);
+	console.log("Head Data = %s", ll.getHead().getData());
+	ll.addNode(1);
+	ll.addNode(2);
+	ll.addNode(3);
+	ll.addNode(4);
+
+	var llNode = ll.getHead();
+	while (llNode != null) {
+		console.log(llNode.getData());
+		llNode = llNode.getNext();
+	};
+}
+
+</script>
+
+</body>
+</html>
