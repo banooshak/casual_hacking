@@ -1,0 +1,54 @@
+<!DOCTYPE >
+<html>
+  <body>
+    <p>Check for One Away</p>
+    <span>String 1: </span>
+    <input id="string1" type="text" />
+    <span>String 2: </span>
+    <input id="string2" type="text" />
+    <button id="btn" onclick="renderOneAway()">Check One Away</button>
+    <div id="response"></div>
+  </body>
+  <script>
+    function renderOneAway() {
+      let string1 = document.getElementById('string1').value;
+      let string2 = document.getElementById('string2').value;
+      let result = oneAway(string1, string2);
+      if (result == true) {
+        let message = document.createElement('p');
+        message.innerHTML = string1 + ' and ' + string2 + ' are one edit away!';
+        document.getElementById('response').appendChild(message);
+      } else {
+        let message = document.createElement('p');
+        message.innerHTML =
+          string1 + ' and ' + string2 + ' are NOT one edit away!';
+        document.getElementById('response').appendChild(message);
+      }
+    }
+    function oneAway(string1, string2) {
+      let count = 0;
+      if (Math.abs(string1.length - string2.length) > 1) {
+        return false;
+      } else if (Math.abs(string1.length - string2.length) == 1) {
+        if (string2.length > string1.length) {
+          let a = string1;
+          string1 = string2;
+          string2 = a;
+        }
+        let j = 0;
+        for (let i = 0; i < string1.length; i++) {
+          if (string1[i] !== string2[j]) {
+            count++;
+          } else {
+            j++;
+          }
+        }
+        if (count > 1) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+  </script>
+</html>

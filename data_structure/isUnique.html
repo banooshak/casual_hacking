@@ -1,0 +1,76 @@
+<!DOCTYPE >
+<html>
+  <body>
+    <p>Check if your String Is unique</p>
+    <input id="stringIsUnique" type="text" />
+    <button id="btnIsUnique" onclick="isUniqueWithSort()">Is Unique</button>
+    <div id="response"></div>
+
+    <script>
+        // Using Map and O(n)=n and additional space comlexity=n
+      function isUnique() {
+        const charMap = new Map();
+        const stringIsUniqueValue =
+          document.getElementById('stringIsUnique').value;
+        for (let i = 0; i < stringIsUniqueValue.length; i++) {
+          if (charMap.has(stringIsUniqueValue[i])) {
+            let message = document.createElement('p');
+            message.innerHTML = 'The String is NOT unique';
+            document.getElementById('response').appendChild(message);
+            return;
+          } else {
+            charMap.set(stringIsUniqueValue[i], 1);
+          }
+        }
+        let message = document.createElement('p');
+        message.innerHTML = 'The String IS unique';
+        document.getElementById('response').appendChild(message);
+      }
+
+      // Using Set object and O(n)=n and additional space comlexity=n
+      function isUniqueWithSet() {
+        const charSet = new Set();
+        const stringIsUniqueValue =
+          document.getElementById('stringIsUnique').value;
+        for (let i = 0; i < stringIsUniqueValue.length; i++) {
+          if (charSet.has(stringIsUniqueValue[i])) {
+            let message = document.createElement('p');
+            message.innerHTML = 'The String is NOT unique';
+            document.getElementById('response').appendChild(message);
+            return;
+          } else {
+            charSet.add(stringIsUniqueValue[i]);
+          }
+        }
+        let message = document.createElement('p');
+        message.innerHTML = 'The String IS unique';
+        document.getElementById('response').appendChild(message);
+      }
+
+      // Using Sort and loop and O(n)=nlogn and additional space comlexity=0
+      function isUniqueWithSort() {
+        function sortString(str) {
+          var arr = str.split('');
+          var sorted = arr.sort();
+          return sorted.join('');
+        }
+
+        const stringIsUniqueValue =
+          document.getElementById('stringIsUnique').value;
+        let sortedString = sortString(stringIsUniqueValue);
+
+        for (let i = 0; i < sortedString.length - 1; i++) {
+          if (sortedString[i] === sortedString[i + 1]) {
+            let message = document.createElement('p');
+            message.innerHTML = 'The String is NOT unique';
+            document.getElementById('response').appendChild(message);
+            return;
+          }
+        }
+        let message = document.createElement('p');
+        message.innerHTML = 'The String IS unique';
+        document.getElementById('response').appendChild(message);
+      }
+    </script>
+  </body>
+</html>

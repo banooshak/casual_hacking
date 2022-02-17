@@ -1,0 +1,60 @@
+<!DOCTYPE >
+<html>
+  <body>
+    <p>Check if your String Is Palidrrom Premutated</p>
+    <input id="string1" type="text" />
+    <button id="btn1" onclick="renderIsPermutation()">
+      Palidrom Premutation
+    </button>
+    <div id="response"></div>
+  </body>
+
+  <script>
+    function palidromPremutation() {
+      let string1 = document.getElementById('string1').value;
+      const map1 = new Map();
+
+      for (let i = 0; i < string1.length; i++) {
+        let currentValue = 0;
+        if (map1.has(string1[i])) {
+          currentValue = map1.get(string1[i]);
+        }
+        map1.set(string1[i], currentValue + 1);
+      }
+
+      let allowedOdd = 0;
+      if (string1.length % 2 !== 0) {
+        allowedOdd = 1;
+      }
+
+      try {
+        map1.forEach((value) => {
+          if (value % 2 != 0) {
+            allowedOdd--;
+            if (allowedOdd < 0) {
+              throw 'not a palindrome!';
+            }
+          }
+        });
+      } catch (e) {
+          console.error(e);
+        return false;
+      }
+
+      return true;
+    }
+
+    function renderIsPermutation() {
+      let result = palidromPremutation();
+      if (result == true) {
+        let message = document.createElement('p');
+        message.innerHTML = 'It is palindrom premutated!';
+        document.getElementById('response').appendChild(message);
+      } else {
+        let message = document.createElement('p');
+        message.innerHTML = 'It is NOT palindrom premutated!';
+        document.getElementById('response').appendChild(message);
+      }
+    }
+  </script>
+</html>

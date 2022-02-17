@@ -1,0 +1,155 @@
+<!DOCTYPE >
+<html>
+  <body>
+    <p>Sort stack using only an auxiliary stack</p>
+    <span>Create a stack by pushing elements into a stack</span>
+    <input id="number" type="text" />
+    <button id="push" onclick="push();">push</button>
+    <button id="renderSorted" onclick="sort();">sort and render</button>
+    <div
+      id="renderArea"
+      style="display: flex; flex-direction: row; width: 100vw"
+    >
+      <div
+        id="response"
+        style="display: inline-flex; width: 33vw; flex-direction: column"
+      ></div>
+      <div
+        id="mainStack"
+        style="
+          display: inline-flex;
+          width: 33vw;
+          flex-direction: column-reverse;
+          place-items: center;
+        "
+      ></div>
+      <div
+        id="auxStack"
+        style="
+          display: inline-flex;
+          width: 33vw;
+          flex-direction: column-reverse;
+          place-items: center;
+        "
+      ></div>
+    </div>
+    <script>
+      const mainStack = [];
+      const auxStack = [];
+
+      function push() {
+        const num = Number(document.getElementById('number').value);
+        mainStack.push(num);
+        renderMessage('Pushed a new number: ' + peekMain());
+        renderMainStack();
+      }
+
+      function pushMain(num) {
+        mainStack.push(num);
+      }
+
+      function pushAux(num) {
+        auxStack.push(num);
+      }
+
+      function isMainEmpty() {
+        return isStackEmpty(mainStack);
+      }
+
+      function isAuxEmpty() {
+        return isStackEmpty(auxStack);
+      }
+
+      function isStackEmpty(stack) {
+        return stack.length == 0;
+      }
+
+      function pop(stack) {
+        if (stack.length == 0) {
+          return;
+        }
+        const num = stack.pop();
+        return num;
+      }
+
+      function popMain() {
+        return pop(mainStack);
+      }
+
+      function popAux() {
+        return pop(auxStack);
+      }
+
+      function renderMainStack() {
+        const mainStackBox = document.getElementById('mainStack');
+        mainStackBox.innerHTML = '';
+        for (let i = 0; i < mainStack.length; i++) {
+          let box = document.createElement('div');
+          box.innerHTML = mainStack[i];
+          box.style.cssText =
+            'border: 3px solid #449933; width: 95%; height: 40px; margin: 2px 0px; font-size:30px; text-align: center; background-color: #227711; color: #ffffff; border-radius:10px;';
+          mainStackBox.appendChild(box);
+        }
+      }
+
+      function sort() {
+        while (isMainEmpty() == false) {
+          if (isAuxEmpty()) {
+            let value = popMain();
+            pushAux(value);
+          } else {
+            if (peekMain() > peekAux()) {
+              let value = popMain();
+              pushAux(value);
+            } else {
+              let temp = popMain();
+              while (temp < peekAux()) {
+                
+                let valuB = popAux();
+                pushMain(valuB);
+              }
+              pushAux(temp);
+            }
+          }
+        }
+
+        while (isAuxEmpty() == false) {
+          pushMain(popAux());
+        }
+        renderSortedStack();
+      }
+
+      function renderSortedStack() {
+        const auxStackBox = document.getElementById('auxStack');
+        auxStackBox.innerHTML = '';
+        for (let i = 0; i < mainStack.length; i++) {
+          let box = document.createElement('div');
+          box.innerHTML = mainStack[i];
+          box.style.cssText =
+            'border: 3px solid #443399; width: 95%; height: 40px; margin: 2px 0px; font-size:30px; text-align: center; background-color: #221177; color: #ffffff; border-radius:10px;';
+          auxStackBox.appendChild(box);
+        }
+      }
+
+      function peekMain() {
+        if (mainStack.length == 0) {
+          return undefined;
+        }
+        return mainStack[mainStack.length - 1];
+      }
+
+      function peekAux() {
+        if (auxStack.length == 0) {
+          return undefined;
+        }
+        return auxStack[auxStack.length - 1];
+      }
+
+      function renderMessage(msg) {
+        let message = document.createElement('p');
+        message.innerHTML = msg;
+        document.getElementById('response').appendChild(message);
+      }
+    </script>
+  </body>
+</html>

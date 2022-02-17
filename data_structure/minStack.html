@@ -1,0 +1,63 @@
+<!DOCTYPE >
+<html>
+  <body>
+    <p>Stack with min function with O(n) = 1 time complexity</p>
+    <span>New number:</span>
+    <input id="number" type="text" />
+    <button id="push" onclick="push();">push</button>
+    <button id="pop" onclick="pop();">pop</button>
+    <button id="min" onclick="min();">min</button>
+    <div id="response"></div>
+    <script>
+      const mainStack = [];
+      const minStack = [];
+
+      function push() {
+        const num = Number(document.getElementById('number').value);
+        mainStack.push(num);
+
+        renderMessage('Pushed a new number: ' + peekMain());
+
+        if (num < peekMin()) {
+          minStack.push(num);
+        }
+      }
+
+      function pop() {
+        if (mainStack.length == 0) {
+          return;
+        }
+        const num = mainStack.pop();
+        renderMessage('Poped a number: ' + num);
+
+        if (num === peekMin()){
+            minStack.pop();
+        }
+      }
+
+      function min() {
+        renderMessage('min value in stack is : ' + peekMin());
+      }
+
+      function peekMain() {
+        if (mainStack.length == 0) {
+          return 'empty';
+        }
+        return mainStack[mainStack.length - 1];
+      }
+
+      function peekMin() {
+        if (minStack.length == 0) {
+          return Number.POSITIVE_INFINITY;
+        }
+        return minStack[minStack.length - 1];
+      }
+
+      function renderMessage(msg) {
+        let message = document.createElement('p');
+        message.innerHTML = msg;
+        document.getElementById('response').appendChild(message);
+      }
+    </script>
+  </body>
+</html>

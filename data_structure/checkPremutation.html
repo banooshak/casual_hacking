@@ -1,0 +1,56 @@
+<!DOCTYPE >
+<html>
+  <body>
+    <p>Add 2 strings and check them for premutation</p>
+    <span>String 1: </span>
+    <input id="string1" type="text" />
+    <span>String 2: </span>
+    <input id="string2" type="text" />
+    <button id="btnPremutation" onclick="checkPremutation()">
+      Check Premutation
+    </button>
+    <div id="response"></div>
+  </body>
+  <script>
+    function checkPremutation() {
+      let string1 = document.getElementById('string1').value;
+      let string2 = document.getElementById('string2').value;
+      if (string1.length === string2.length) {
+        const map1 = new Map();
+
+        for (let i = 0; i < string1.length; i++) {
+          let currentValue = 0;
+          if (map1.has(string1[i])) {
+            currentValue = map1.get(string1[i]);
+          }
+          map1.set(string1[i], currentValue + 1);
+        }
+
+        for (let i = 0; i < string2.length; i++) {
+          if (map1.has(string2[i])) {
+            //map1.get(string2[i]) - 1
+            map1.set(string2[i], map1.get(string2[i]) - 1);
+          }
+        }
+
+        map1.forEach((value) => {
+          if (value != 0) {
+            // False
+            let message = document.createElement('p');
+            message.innerHTML = 'The 2 strings are NOT premutated';
+            document.getElementById('response').appendChild(message);
+          }
+        });
+
+        // True
+        let message = document.createElement('p');
+        message.innerHTML = 'The 2 strings ARE premutated';
+        document.getElementById('response').appendChild(message);
+      } else {
+        let message = document.createElement('p');
+        message.innerHTML = 'The 2 strings are NOT premutated';
+        document.getElementById('response').appendChild(message);
+      }
+    }
+  </script>
+</html>
